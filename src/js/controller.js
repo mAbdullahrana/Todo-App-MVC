@@ -16,6 +16,7 @@ const controlLoadTodo = function () {
 const controlCompletedTodo = function (data, id) {
   const i = model.state.message.findIndex((el) => el.id == id);
   model.state.message[i].completed = data;
+  model.storeTodo();
 };
 
 const init = function () {

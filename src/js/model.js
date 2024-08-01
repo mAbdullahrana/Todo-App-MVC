@@ -15,7 +15,7 @@ export const deleteData = function (id) {
   storeTodo();
 };
 
-const storeTodo = function () {
+export const storeTodo = function () {
   localStorage.setItem('todos', JSON.stringify(state.message));
 };
 

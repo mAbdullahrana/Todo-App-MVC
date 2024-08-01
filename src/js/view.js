@@ -2,15 +2,10 @@ export class View {
   #parentEl = document.querySelector('.todo');
   _form = document.querySelector('form');
   #work = document.querySelector('.todo--list');
-  // #done = document.querySelector('.select-work')
   #message = 'Nothing to do! Add a task?';
   #completed = document.querySelector('.btn--done');
   _data;
   _i = 0;
-
-  // constructor() {
-  //   this.addHandlerCompleted();
-  // }
 
   #clear() {
     this.#parentEl.innerHTML = '';
