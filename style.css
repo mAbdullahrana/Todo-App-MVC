@@ -40,6 +40,13 @@ input {
   /* padding-right: 15px; */
 }
 
+.btn--done {
+  background-color: #007bff;
+  color: #f4f4f4;
+  font-size: larger;
+  display: inline;
+}
+
 .btn--submit:hover {
   background-color: rgb(29, 29, 219);
 }
@@ -80,10 +87,11 @@ input {
   font-size: 2rem;
 }
 
-li span {
-  display: inline-block;
-  padding: 0.5rem;
-  width: 250px;
-  border-radius: 4px;
-  border: 2px solid transparent;
+.hidden {
+  display: none;
+}
+
+
+.completed{
+  background-color: #45e040;
 }
