@@ -7,16 +7,20 @@ export class View {
   _data;
   _i = 0;
 
+  constructor() {
+    // this.addHandlerEdit();
+  }
+
   #clear() {
     this.#parentEl.innerHTML = '';
   }
 
   render(data) {
-    const markup = this.#generateWorkMarkup(data);
+    const markup = this.#generateMarkup(data);
     this.#parentEl.insertAdjacentHTML('afterbegin', markup);
   }
   renderAll(data) {
-    const markup = this.#generateAllMarkup(data);
+    const markup = this.#generateMarkup(data);
     this.#clear();
     this.#parentEl.insertAdjacentHTML('afterbegin', markup);
   }
@@ -61,38 +65,45 @@ export class View {
     });
   }
 
+  // addHandlerEdit() {
+  //   this.#parentEl.addEventListener('click', function (e) {
+  //     const btn = e.target.closest('.btn--edit');
+  //     if (!btn) return;
+  //     const form = `<form >
+  //     <input class="message" type="text" placeholder="Add Todo" >
+  //     <button class="btn btn--submit" type="submit">SUBMIT</button>
+  //     </form>`;
+  //     const data = btn.closest('.work-container').querySelector('.work').textContent;
+  //     console.log(data);
+  //     const markup = btn.closest('.todo--list').insertAdjacentHTML('afterbegin',form);
+  //     this.#generateMarkup()
+  //     // btn.closest('.work-container').innerHTML = ''
+  //     document.querySelector('.message').value = data
+  //   });
+  // }
+
   addHandlerLoad(handler) {
     window.addEventListener('load', function () {
       handler();
     });
   }
 
-  #generateWorkMarkup(data) {
-    return `
-      <li class="todo--list" >
-        <ul class="work-container" >
-          <p  class="work">${data ? data[0].todo : ''}</p>
-           <button class="btn btn--done " data-id = "${
-             data[0].id
-           }">Done</button>
-          <button class="btn btn--delete" data-work = "${
-            data ? data[0].id : ''
-          }">Delete</button>
-        </ul>
-      </li>
-      `;
-  }
-  #generateAllMarkup(data) {
+  #generateMarkup(data) {
     return data
-      .map(el => {
+      .map((el, _, arr) => {
         return `
       <li class="todo--list ${el.completed ? 'completed' : ''}" >
         <ul class="work-container" >
-          <p  class="work">${el.todo}</p>
+          <p  class="work">${arr.length === 1 ? arr[0].todo : el.todo}</p>
+          <button class="btn btn--edit " data-id = "${
+            arr.length === 1 ? arr[0].id : el.id
+          }">Edit</button>
            <button class="btn btn--done ${
              el.completed ? 'hidden' : ''
-           }" data-id = "${el.id}"  >Done</button>
-          <button class="btn btn--delete" data-work = "${el.id}">Delete</button>
+           } " data-id = "${arr.length === 1 ? arr[0].id : el.id}">Done</button>
+          <button class="btn btn--delete" data-work = "${
+            arr.length === 1 ? arr[0].id : el.id
+          }">Delete</button>
         </ul>
       </li>
       `;
