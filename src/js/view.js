@@ -60,6 +60,10 @@ export class View {
       if (!btn) return;
       btn.closest('.todo--list').classList.add('completed');
       btn.classList.add('hidden');
+      btn
+        .closest('.todo--list')
+        .querySelector('.btn--edit')
+        .classList.add('hidden');
 
       handler(true, +btn.dataset.id);
     });
@@ -88,16 +92,18 @@ export class View {
         document.querySelector('.new-message').value = data;
 
         document.querySelector('.edit').addEventListener('click', function (e) {
-          const edit = e.target.closest('form').querySelector('.new-message').value;
+          const edit = e.target
+            .closest('form')
+            .querySelector('.new-message').value;
 
-          btn.closest('.work-container').querySelector('.work').textContent = edit;
+          btn.closest('.work-container').querySelector('.work').textContent =
+            edit;
 
           btn.closest('.work-container').classList.remove('hidden');
 
-          e.target.closest('form').classList.add('hidden')
-          
-          handler(edit , +btn.dataset.id)
+          e.target.closest('form').classList.add('hidden');
 
+          handler(edit, +btn.dataset.id);
         });
       }.bind(this)
     );
@@ -116,9 +122,9 @@ export class View {
       <li class="todo--list ${el.completed ? 'completed' : ''}" >
         <ul class="work-container" >
           <p  class="work">${arr.length === 1 ? arr[0].todo : el.todo}</p>
-          <button class="btn btn--edit " data-id = "${
-            arr.length === 1 ? arr[0].id : el.id
-          }">Edit</button>
+          <button class="btn btn--edit ${
+            el.completed ? 'hidden' : ''
+          } " data-id = "${arr.length === 1 ? arr[0].id : el.id}">Edit</button>
            <button class="btn btn--done ${
              el.completed ? 'hidden' : ''
            } " data-id = "${arr.length === 1 ? arr[0].id : el.id}">Done</button>
