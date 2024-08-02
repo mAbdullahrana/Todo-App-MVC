@@ -7,9 +7,9 @@ export class View {
   _data;
   _i = 0;
 
-  constructor() {
-    this.addHandlerEdit();
-  }
+  // constructor() {
+  //   this.addHandlerEdit();
+  // }
 
   #clear() {
     this.#parentEl.innerHTML = '';
@@ -65,7 +65,7 @@ export class View {
     });
   }
 
-  addHandlerEdit() {
+  addHandlerEdit(handler) {
     this.#parentEl.addEventListener(
       'click',
       function (e) {
@@ -95,6 +95,9 @@ export class View {
           btn.closest('.work-container').classList.remove('hidden');
 
           e.target.closest('form').classList.add('hidden')
+          
+          handler(edit , +btn.dataset.id)
+
         });
       }.bind(this)
     );

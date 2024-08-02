@@ -13,9 +13,14 @@ const controlLoadTodo = function () {
   view.renderAll(model.state.message.slice().reverse());
 };
 
-const controlCompletedTodo = function (data, id) {
+// This function will deal with both data's either the user completed the todo or edited it
+
+const controlCompletedOrEditTodo = function (data, id) {
   const i = model.state.message.findIndex(el => el.id == id);
-  model.state.message[i].completed = data;
+
+  data === true
+    ? (model.state.message[i].completed = data)
+    : (model.state.message[i].todo = data);
   model.localStoreTodo();
 };
 
@@ -23,7 +28,8 @@ const init = function () {
   view.addedTodo(controlAddTodo);
   view.deleteTodo(controlDeleteTodo);
   view.addHandlerLoad(controlLoadTodo);
-  view.addHandlerCompleted(controlCompletedTodo);
+  view.addHandlerCompleted(controlCompletedOrEditTodo);
+  view.addHandlerEdit(controlCompletedOrEditTodo);
 };
 
 init();
