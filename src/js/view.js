@@ -8,7 +8,7 @@ export class View {
   _i = 0;
 
   constructor() {
-    // this.addHandlerEdit();
+    this.addHandlerEdit();
   }
 
   #clear() {
@@ -65,22 +65,40 @@ export class View {
     });
   }
 
-  // addHandlerEdit() {
-  //   this.#parentEl.addEventListener('click', function (e) {
-  //     const btn = e.target.closest('.btn--edit');
-  //     if (!btn) return;
-  //     const form = `<form >
-  //     <input class="message" type="text" placeholder="Add Todo" >
-  //     <button class="btn btn--submit" type="submit">SUBMIT</button>
-  //     </form>`;
-  //     const data = btn.closest('.work-container').querySelector('.work').textContent;
-  //     console.log(data);
-  //     const markup = btn.closest('.todo--list').insertAdjacentHTML('afterbegin',form);
-  //     this.#generateMarkup()
-  //     // btn.closest('.work-container').innerHTML = ''
-  //     document.querySelector('.message').value = data
-  //   });
-  // }
+  addHandlerEdit() {
+    this.#parentEl.addEventListener(
+      'click',
+      function (e) {
+        const btn = e.target.closest('.btn--edit');
+        if (!btn) return;
+        let form = `<form >
+      <input class="new-message" type="text" placeholder="Add Todo" >
+      <button class="btn btn--submit edit" type="submit">SUBMIT</button>
+      </form>`;
+        const data = btn
+          .closest('.work-container')
+          .querySelector('.work').textContent;
+
+        const markup = btn
+          .closest('.todo--list')
+          .insertAdjacentHTML('afterbegin', form);
+
+        btn.closest('.work-container').classList.add('hidden');
+
+        document.querySelector('.new-message').value = data;
+
+        document.querySelector('.edit').addEventListener('click', function (e) {
+          const edit = e.target.closest('form').querySelector('.new-message').value;
+
+          btn.closest('.work-container').querySelector('.work').textContent = edit;
+
+          btn.closest('.work-container').classList.remove('hidden');
+
+          e.target.closest('form').classList.add('hidden')
+        });
+      }.bind(this)
+    );
+  }
 
   addHandlerLoad(handler) {
     window.addEventListener('load', function () {

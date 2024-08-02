@@ -2,20 +2,20 @@ export const state = {
   message: [],
 };
 
-export const storingData = function (data) {
+export const storeTodo = function (data) {
   state.message.push(data);
-  storeTodo();
+  localStoreTodo();
 };
 
-export const deleteData = function (id) {
+export const deleteTodo = function (id) {
   state.message.splice(
     state.message.findIndex(el => el.id === id),
     1
   );
-  storeTodo();
+  localStoreTodo();
 };
 
-export const storeTodo = function () {
+export const localStoreTodo = function () {
   localStorage.setItem('todos', JSON.stringify(state.message));
 };
 
