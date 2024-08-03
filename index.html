@@ -9,30 +9,43 @@
       rel="stylesheet"
     />
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script type="module" src="src/js/controller.js"></script>
 
     <title>TODO APP</title>
   </head>
-<body>
-  <div class="container">
-  <h1 class="primary-heading">Todo List</h1>
-  <form >
-      <input class="message" type="text" placeholder="Add Todo" >
-      <button class="btn btn--submit" type="submit">SUBMIT</button>
-    </form>
+  <body>
+    <div class="grid-container">
+      <div class="categories">
+        <button class="btn btn--submit">Montly Todos</button>
+        <button class=" btn btn--submit">Yearly Todos</button>
+      </div>
+      <div class="container">
+        <div class="todo-container">
+        <h1 class="primary-heading">Todo List</h1>
+        <form>
+          
+          <input class="message" type="text" placeholder="Add Todo" />
+          <select class="select-todo" id="todo-select">
+              <option value="today">Today</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+          </select>
+          <button class="btn btn--submit" type="submit">SUBMIT</button>
+        </form>
 
-    <div class="todo"> 
-     <li class="todo--list">
-        <!-- <ul class="work-container">
+        <div class="todo">
+          <li class="todo--list">
+            <!-- <ul class="work-container">
           <input class="select-work" type="checkbox">
           <p  class="work">Walk on Friday</p>
           <button class="btn btn--delete">Delete</button>
         </ul> -->
-      </li>
+          </li>
+        </div>
+      </div>
+      </div>
+     
     </div>
-  </div>
-    
-</body>
-
+  </body>
 </html>

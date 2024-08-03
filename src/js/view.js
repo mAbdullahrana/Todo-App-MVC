@@ -8,7 +8,7 @@ export class View {
   _i = 0;
 
   // constructor() {
-  //   this.addHandlerEdit();
+  //   this.addHandlerSelect()
   // }
 
   #clear() {
@@ -31,10 +31,12 @@ export class View {
       function (e) {
         e.preventDefault();
         this._data = document.querySelector('.message').value;
+       const time = document.querySelector('.select-todo').value;
         if (this._data === '') return;
         handler({
           todo: this._data,
           id: this._i++,
+          duration : time,
         });
         document.querySelector('.message').value = '';
       }.bind(this)
@@ -75,7 +77,7 @@ export class View {
       function (e) {
         const btn = e.target.closest('.btn--edit');
         if (!btn) return;
-        let form = `<form >
+        const form = `<form >
       <input class="new-message" type="text" placeholder="Add Todo" >
       <button class="btn btn--submit edit" type="submit">SUBMIT</button>
       </form>`;
@@ -83,9 +85,7 @@ export class View {
           .closest('.work-container')
           .querySelector('.work').textContent;
 
-        const markup = btn
-          .closest('.todo--list')
-          .insertAdjacentHTML('afterbegin', form);
+        btn.closest('.todo--list').insertAdjacentHTML('afterbegin', form);
 
         btn.closest('.work-container').classList.add('hidden');
 

@@ -1,10 +1,17 @@
 export const state = {
   message: [],
+  month: [],
+  year: [],
 };
 
 export const storeTodo = function (data) {
-  state.message.push(data);
+   if(data.duration === 'month')state.month.push(data) 
+   else if (data.duration === 'year') state.year.push(data) 
+   else state.message.push(data) 
   localStoreTodo();
+  console.log(state.message);
+  console.log(state.year);
+  console.log(state.month);
 };
 
 export const deleteTodo = function (id) {

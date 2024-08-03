@@ -1,5 +1,6 @@
 import view from './view.js';
 import * as model from './model.js';
+import SelectView from './newView/selectView.js';
 
 const controlAddTodo = function (data) {
   model.storeTodo(data);
