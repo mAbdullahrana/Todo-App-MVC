@@ -1,29 +1,17 @@
-export class View {
-  #parentEl = document.querySelector('.todo');
+import View from './View.js'
+
+class TodoView extends View {
+  _parentEl = document.querySelector('.todo');
   _form = document.querySelector('form');
-  #work = document.querySelector('.todo--list');
   #message = 'Nothing to do! Add a task?';
-  #completed = document.querySelector('.btn--done');
-  _data;
-  _i = 0;
+
+  _i = 1;
 
   // constructor() {
   //   this.addHandlerSelect()
   // }
 
-  #clear() {
-    this.#parentEl.innerHTML = '';
-  }
-
-  render(data) {
-    const markup = this.#generateMarkup(data);
-    this.#parentEl.insertAdjacentHTML('afterbegin', markup);
-  }
-  renderAll(data) {
-    const markup = this.#generateMarkup(data);
-    this.#clear();
-    this.#parentEl.insertAdjacentHTML('afterbegin', markup);
-  }
+  
 
   addedTodo(handler) {
     this._form.addEventListener(
@@ -43,7 +31,7 @@ export class View {
     );
   }
   deleteTodo(handler) {
-    this.#parentEl.addEventListener(
+    this._parentEl.addEventListener(
       'click',
       function (e) {
         e.preventDefault();
@@ -51,13 +39,13 @@ export class View {
         if (!btn) return;
         handler(+btn.dataset.work);
 
-        this.#work.innerHTML = '';
+        this._work.innerHTML = '';
       }.bind(this)
     );
   }
 
   addHandlerCompleted(handler) {
-    this.#parentEl.addEventListener('click', function (e) {
+    this._parentEl.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--done');
       if (!btn) return;
       btn.closest('.todo--list').classList.add('completed');
@@ -72,7 +60,7 @@ export class View {
   }
 
   addHandlerEdit(handler) {
-    this.#parentEl.addEventListener(
+    this._parentEl.addEventListener(
       'click',
       function (e) {
         const btn = e.target.closest('.btn--edit');
@@ -115,28 +103,7 @@ export class View {
     });
   }
 
-  #generateMarkup(data) {
-    return data
-      .map((el, _, arr) => {
-        return `
-      <li class="todo--list ${el.completed ? 'completed' : ''}" >
-        <ul class="work-container" >
-          <p  class="work">${arr.length === 1 ? arr[0].todo : el.todo}</p>
-          <button class="btn btn--edit ${
-            el.completed ? 'hidden' : ''
-          } " data-id = "${arr.length === 1 ? arr[0].id : el.id}">Edit</button>
-           <button class="btn btn--done ${
-             el.completed ? 'hidden' : ''
-           } " data-id = "${arr.length === 1 ? arr[0].id : el.id}">Done</button>
-          <button class="btn btn--delete" data-work = "${
-            arr.length === 1 ? arr[0].id : el.id
-          }">Delete</button>
-        </ul>
-      </li>
-      `;
-      })
-      .join('');
-  }
+ 
 }
 
-export default new View();
+export default new TodoView();
