@@ -3,13 +3,22 @@ import View from './View.js';
 class MonthView extends View {
   _parentEl = document.querySelector('.main-content');
   _month = document.querySelector('.btn--month');
-  _work = document.querySelector('.todo--list');
+  _hash = '#month'
 
-  // constructor(){
-  //   super()
-  //   this.addHandlerMonth()
-  // }
 
+
+//   constructor(){
+//     super()
+//     this.addHandlerHashChange()
+//   }
+// addHandlerHashChange(){
+
+//   window.addEventListener('hashchange',function(e){
+//   if(window.location.hash !== '#month')  return
+//   console.log('hi');
+ 
+//   })
+// }
   deleteMonthTodo(handler) {
     document.querySelector('.todo-container').addEventListener(
       'click',
@@ -28,6 +37,7 @@ class MonthView extends View {
       'click',
       function (e) {
         e.preventDefault();
+          window.location.hash = 'month';
         const btn = e.target.closest('.btn--month');
         // document.querySelector('.main-content').innerHTML = '';
         this._clear();
@@ -35,6 +45,7 @@ class MonthView extends View {
         const heading = (document.querySelector(
           '.primary-heading'
         ).textContent = 'Monthly Todo List');
+        // window.location.hash = '#montly'
 
         this.deleteMonthTodo(handler);
       }.bind(this)

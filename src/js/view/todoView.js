@@ -4,13 +4,20 @@ class TodoView extends View {
   _parentEl = document.querySelector('.todo');
   _form = document.querySelector('form');
   #message = 'Nothing to do! Add a task?';
-
+  _hash = '#todo'
   _i = 1;
 
-  // constructor() {
-  //   this.addHandlerSelect()
-  // }
+  constructor() {
+    super()
+    // this.addHandlerSelect()
+    this.addHandlerFirstLoad
+  }
 
+  addHandlerFirstLoad(){
+    document.addEventListener('DOMContentLoaded', function(e){
+      window.location.hash = 'today'
+    });
+  }
   
 
   addedTodo(handler) {
@@ -97,12 +104,7 @@ class TodoView extends View {
     );
   }
 
-  addHandlerLoad(handler) {
-    window.addEventListener('load', function () {
-      handler();
-    });
-  }
-
+  
  
 }
 

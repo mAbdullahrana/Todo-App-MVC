@@ -2,6 +2,7 @@ export default class View {
   _parentEl;
   _data;
   _work = document.querySelector('.todo--list');
+  _hash;
   _clear() {
     this._parentEl.innerHTML = '';
   }
@@ -41,4 +42,11 @@ export default class View {
       })
       .join('');
   }
+
+  addHandlerLoad(handler) {
+    window.addEventListener('load', function (e) {
+   if(window.location.hash === this._hash) handler();
+    }.bind(this));
+  }
+
 }
