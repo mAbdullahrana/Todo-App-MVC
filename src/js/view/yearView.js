@@ -1,45 +1,45 @@
 import View from './View.js';
 
-class MonthView extends View {
+class YearView extends View {
   _parentEl = document.querySelector('.main-content');
-  _month = document.querySelector('.btn--month');
-  _hash = '#month';
-  _edit = '.month';
+  _month = document.querySelector('.btn--year');
+  _hash = '#year';
+  _edit = '.year'
+
   // constructor() {
   //   super();
   //   this.addHandlerEdit();
   // }
-  deleteMonthTodo(handler) {
+  deleteYearTodo(handler) {
     document.querySelector('.todo-container').addEventListener(
       'click',
       function (e) {
         e.preventDefault();
         const btn = e.target.closest('.btn--delete');
         if (!btn) return;
-        btn.closest('.month').innerHTML = '';
+        btn.closest('.year').innerHTML = '';
         handler(+btn.dataset.work);
       }.bind(this)
     );
   }
 
-  addHandlerMonth(handler) {
-    document.querySelector('.btn--month').addEventListener(
+  addHandlerYear(handler) {
+    document.querySelector('.btn--year').addEventListener(
       'click',
       function (e) {
         e.preventDefault();
-        window.location.hash = 'month';
-        const btn = e.target.closest('.btn--month');
+        window.location.hash = 'year';
         // document.querySelector('.main-content').innerHTML = '';
         this._clear();
         handler();
         const heading = (document.querySelector(
           '.primary-heading'
-        ).textContent = 'Monthly Todo List');
+        ).textContent = 'Yearly Todo List');
 
-        this.deleteMonthTodo(handler);
+        this.deleteYearTodo(handler);
       }.bind(this)
     );
   }
 }
 
-export default new MonthView();
+export default new YearView();

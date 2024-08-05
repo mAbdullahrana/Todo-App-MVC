@@ -5,17 +5,18 @@ class TodoView extends View {
   _form = document.querySelector('form');
   #message = 'Nothing to do! Add a task?';
   _hash = '#todo'
+  _edit = '.today'
   _i = 1;
 
   constructor() {
     super()
     // this.addHandlerSelect()
-    this.addHandlerFirstLoad
+    this.addHandlerFirstLoad()
   }
 
   addHandlerFirstLoad(){
     document.addEventListener('DOMContentLoaded', function(e){
-      window.location.hash = 'today'
+      window.location.hash = '#todo'
     });
   }
   
@@ -51,58 +52,8 @@ class TodoView extends View {
     );
   }
 
-  addHandlerCompleted(handler) {
-    this._parentEl.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--done');
-      if (!btn) return;
-      btn.closest('.todo--list').classList.add('completed');
-      btn.classList.add('hidden');
-      btn
-        .closest('.todo--list')
-        .querySelector('.btn--edit')
-        .classList.add('hidden');
+  
 
-      handler(true, +btn.dataset.id);
-    });
-  }
-
-  addHandlerEdit(handler) {
-    this._parentEl.addEventListener(
-      'click',
-      function (e) {
-        const btn = e.target.closest('.btn--edit');
-        if (!btn) return;
-        const form = `<form >
-      <input class="new-message" type="text" placeholder="Add Todo" >
-      <button class="btn btn--submit edit" type="submit">SUBMIT</button>
-      </form>`;
-        const data = btn
-          .closest('.work-container')
-          .querySelector('.work').textContent;
-
-        btn.closest('.todo--list').insertAdjacentHTML('afterbegin', form);
-
-        btn.closest('.work-container').classList.add('hidden');
-
-        document.querySelector('.new-message').value = data;
-
-        document.querySelector('.edit').addEventListener('click', function (e) {
-          const edit = e.target
-            .closest('form')
-            .querySelector('.new-message').value;
-
-          btn.closest('.work-container').querySelector('.work').textContent =
-            edit;
-
-          btn.closest('.work-container').classList.remove('hidden');
-
-          e.target.closest('form').classList.add('hidden');
-
-          handler(edit, +btn.dataset.id);
-        });
-      }.bind(this)
-    );
-  }
 
   
  
