@@ -66,11 +66,7 @@ const init = function () {
   todoView.addHandlerEdit(controlCompletedOrEditTodo);
   todoView.addHandlerLoad(controlLoadTodo);
   monthView.addHandlerMonth(controlMonthView);
-  // monthView.addHandlerLoad(controlMonthView);
-  // monthView.addHandlerCompleted(controlCompletedOrEditMonthTodo);
   yearView.addHandlerYear(controlYearView);
-  // yearView.addHandlerLoad(controlYearView);
-  // yearView.addHandlerCompleted(controlCompletedOrEditYearTodo);
 };
 
 init();
